@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using ScriptablePhonebook.Models;
 using System.Diagnostics;
 
 namespace ScriptablePhonebook.ViewModels
@@ -8,6 +9,8 @@ namespace ScriptablePhonebook.ViewModels
     {
         private string name;
         private string number;
+
+        public Contact Model { get; set; }
 
         public string Name
         {
@@ -34,5 +37,6 @@ namespace ScriptablePhonebook.ViewModels
                 NotifyOfPropertyChange(() => Number);
             }
         }
+
     }
 }

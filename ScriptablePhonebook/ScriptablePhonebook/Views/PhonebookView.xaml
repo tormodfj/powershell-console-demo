@@ -3,11 +3,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Height="500" Width="600" Icon="/ScriptablePhonebook;component/Resources/book.png">
     <Grid>
-        <DataGrid x:Name="Contacts" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="Contacts" Grid.Row="0" Margin="5" IsReadOnly="True" HeadersVisibility="Column"
+                  SelectedItem="{Binding SelectedContact}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Number" Binding="{Binding Number}" />
+                <DataGridTextColumn Header="Name" Width="3*" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Number" Width="*" Binding="{Binding Number}" />
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button x:Name="CreateNewContact">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScriptablePhonebook;component/Resources/book_add.png" />
+                    <TextBlock Margin="5 0 0 0">New</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="EditSelectedContact">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScriptablePhonebook;component/Resources/book_edit.png" />
+                    <TextBlock Margin="5 0 0 0">Edit</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="DeleteSelectedContact">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScriptablePhonebook;component/Resources/book_delete.png" />
+                    <TextBlock Margin="5 0 0 0">Delete</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

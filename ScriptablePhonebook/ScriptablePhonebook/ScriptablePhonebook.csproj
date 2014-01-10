@@ -91,6 +91,11 @@
   <ItemGroup>
     <Resource Include="Resources\book.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\book_add.png" />
+    <Resource Include="Resources\book_delete.png" />
+    <Resource Include="Resources\book_edit.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
