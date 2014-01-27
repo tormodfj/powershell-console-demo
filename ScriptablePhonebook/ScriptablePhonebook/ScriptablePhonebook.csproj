@@ -73,6 +73,7 @@
     <Compile Include="Repositories\ContactRepositoryModifiedMessage.cs" />
     <Compile Include="Repositories\IContactRepository.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
+    <Compile Include="ViewModels\EditContactViewModel.cs" />
     <Compile Include="ViewModels\PhonebookViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +84,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\EditContactView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PhonebookView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +100,12 @@
     <Resource Include="Resources\book_add.png" />
     <Resource Include="Resources\book_delete.png" />
     <Resource Include="Resources\book_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\accept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cancel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

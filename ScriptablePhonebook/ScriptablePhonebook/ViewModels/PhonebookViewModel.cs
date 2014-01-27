@@ -1,9 +1,9 @@
-﻿using Caliburn.Micro;
-using ScriptablePhonebook.Models;
-using ScriptablePhonebook.Repositories;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows;
+using Caliburn.Micro;
+using ScriptablePhonebook.Models;
+using ScriptablePhonebook.Repositories;
 
 namespace ScriptablePhonebook.ViewModels
 {
@@ -11,14 +11,16 @@ namespace ScriptablePhonebook.ViewModels
     public class PhonebookViewModel : Screen, IHandle<ContactRepositoryModifiedMessage>
     {
         private readonly IContactRepository contactRepository;
+        private readonly IWindowManager windowManager;
         private ContactViewModel selectedContact;
 
         [ImportingConstructor]
-        public PhonebookViewModel(IEventAggregator eventAggregator, IContactRepository contactRepository)
+        public PhonebookViewModel(IEventAggregator eventAggregator, IWindowManager windowManager, IContactRepository contactRepository)
         {
             eventAggregator.Subscribe(this);
 
             this.contactRepository = contactRepository;
+            this.windowManager = windowManager;
 
             DisplayName = "Scriptable Phonebook";
             Contacts = new BindableCollection<ContactViewModel>();
@@ -39,13 +41,19 @@ namespace ScriptablePhonebook.ViewModels
 
         public void CreateNewContact()
         {
-            MessageBox.Show("CreateNewContact");
+            var vm = new EditContactViewModel();
+            var result = windowManager.ShowDialog(vm);
+            if(result == true)
+            {
+                contactRepository.AddContact(vm.Result);
+            }
         }
 
         public bool CanEditSelectedContact { get { return selectedContact != null; } }
         public void EditSelectedContact()
         {
-            MessageBox.Show("EditSelectedContact");
+            var vm = new EditContactViewModel(selectedContact.Model);
+            var result = windowManager.ShowDialog(vm);
         }
 
         public bool CanDeleteSelectedContact { get { return selectedContact != null; } }
@@ -73,12 +81,7 @@ namespace ScriptablePhonebook.ViewModels
 
         private ContactViewModel CreateContactViewModel(Contact contact)
         {
-            return new ContactViewModel
-            {
-                Name = contact.Name,
-                Number = contact.Number,
-                Model = contact
-            };
+            return new ContactViewModel(contact);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using ScriptablePhonebook.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ScriptablePhonebook.Models;
 
 namespace ScriptablePhonebook.Repositories
 {

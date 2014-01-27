@@ -1,8 +1,8 @@
-﻿using Caliburn.Micro;
-using ScriptablePhonebook.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using Caliburn.Micro;
+using ScriptablePhonebook.Models;
 
 namespace ScriptablePhonebook.Repositories
 {

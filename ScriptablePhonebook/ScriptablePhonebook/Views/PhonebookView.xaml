@@ -1,7 +1,10 @@
 ﻿<Window x:Class="ScriptablePhonebook.Views.PhonebookView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="500" Width="600" Icon="/ScriptablePhonebook;component/Resources/book.png">
+        Height="500" Width="600" 
+        MinHeight="300" MinWidth="400"
+        Icon="/ScriptablePhonebook;component/Resources/book.png"
+        UseLayoutRounding="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
