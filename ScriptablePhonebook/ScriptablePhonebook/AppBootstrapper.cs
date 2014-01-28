@@ -6,6 +6,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
+using System.Configuration;
 
 namespace ScriptablePhonebook
 {
@@ -25,6 +26,7 @@ namespace ScriptablePhonebook
             batch.AddExportedValue<IWindowManager>(new WindowManager());
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
             batch.AddExportedValue(container);
+            batch.AddExportedValue("Profile", ConfigurationManager.AppSettings["Profile"]);
 
             container.Compose(batch);
 
@@ -43,6 +45,7 @@ namespace ScriptablePhonebook
 
             return exports.First();
         }
+
         protected override IEnumerable<object> GetAllInstances(Type serviceType)
         {
             return container.GetExportedValues<object>(AttributedModelServices.GetContractName(serviceType));
