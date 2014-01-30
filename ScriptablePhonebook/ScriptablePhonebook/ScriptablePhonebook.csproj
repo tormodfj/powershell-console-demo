@@ -89,6 +89,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
+    <None Include="PhonebookProfile.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\EditContactView.xaml">
