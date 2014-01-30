@@ -9,6 +9,6 @@ namespace ScriptablePhonebook.Automation
 
         Runspace Runspace { get; }
         
-        void AddVariable(string name, object value);
+        void SetVariable(string name, object value);
     }
 }

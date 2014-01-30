@@ -10,19 +10,22 @@ namespace ScriptablePhonebook.Automation
     [Export(typeof(IPowerShellHelper))]
     public class PowerShellHelper : IPowerShellHelper
     {
-        private readonly PowerShell Shell;
+        private readonly IPowerShellConfig config;
+        private readonly PowerShell shell;
 
         [ImportingConstructor]
         public PowerShellHelper(IPowerShellConfig config)
         {
-            Shell = PowerShell.Create();
-            Shell.Runspace = config.Runspace;
+            this.config = config;
+
+            shell = PowerShell.Create();
+            shell.Runspace = config.Runspace;
             if (!string.IsNullOrEmpty(config.Profile) && File.Exists(config.Profile))
             {
                 var profileScript = File.ReadAllText(config.Profile);
-                Shell.AddScript(profileScript);
-                Shell.Invoke();
-                Shell.Commands.Clear();
+                shell.AddScript(profileScript);
+                shell.Invoke();
+                shell.Commands.Clear();
             }
         }
 
@@ -31,19 +34,19 @@ namespace ScriptablePhonebook.Automation
             var output = new StringBuilder();
             output.AppendFormat("> {0}", script).AppendLine();
 
-            Shell.AddScript(script);
-            Shell.AddCommand("Out-String");
+            shell.AddScript(script);
+            shell.AddCommand("Out-String");
 
             try
             {
-                var results = Shell.Invoke();
-                if(Shell.Streams.Error.Any())
+                var results = shell.Invoke();
+                if(shell.Streams.Error.Any())
                 {
-                    foreach(var error in Shell.Streams.Error)
+                    foreach(var error in shell.Streams.Error)
                     {
                         AppendError(output, error);
                     }
-                    Shell.Streams.Error.Clear();
+                    shell.Streams.Error.Clear();
                 }
                 else
                 {
@@ -58,8 +61,13 @@ namespace ScriptablePhonebook.Automation
                 output.Append(ex.Message);
             }
 
-            Shell.Commands.Clear();
+            shell.Commands.Clear();
             return output.ToString();
+        }
+
+        public void SetVariable(string name, object value)
+        {
+            config.SetVariable(name, value);
         }
 
         private void AppendError(StringBuilder output, ErrorRecord error)

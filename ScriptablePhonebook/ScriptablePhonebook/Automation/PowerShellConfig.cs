@@ -11,21 +11,30 @@ namespace ScriptablePhonebook.Automation
         [ImportingConstructor]
         public PowerShellConfig([Import("Profile")] string profile)
         {
-            Runspace = RunspaceFactory.CreateRunspace();
-            Runspace.ThreadOptions = PSThreadOptions.UseCurrentThread; // Execute on the thread that calls the Invoke method
-            Runspace.Open();
-
-            Profile = Path.Combine(Environment.CurrentDirectory, profile);
-            AddVariable("profile", Profile);
+            InitRunspace();
+            InitProfile(profile);
         }
 
         public string Profile { get; private set; }
 
         public Runspace Runspace { get; private set; }
 
-        public void AddVariable(string name, object value)
+        public void SetVariable(string name, object value)
         {
             Runspace.SessionStateProxy.SetVariable(name, value);
+        }
+
+        private void InitRunspace()
+        {
+            Runspace = RunspaceFactory.CreateRunspace();
+            Runspace.ThreadOptions = PSThreadOptions.UseCurrentThread;
+            Runspace.Open();
+        }
+
+        private void InitProfile(string profile)
+        {
+            Profile = Path.Combine(Environment.CurrentDirectory, profile);
+            SetVariable("profile", Profile);
         }
     }
 }
