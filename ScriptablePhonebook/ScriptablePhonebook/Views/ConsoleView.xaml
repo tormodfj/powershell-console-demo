@@ -1,0 +1,40 @@
+﻿<Window x:Class="ScriptablePhonebook.Views.ConsoleView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="400" Width="600" 
+        Icon="/ScriptablePhonebook;component/Resources/terminal.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="0" x:Name="Input" Padding="3" TextWrapping="Wrap"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                 FontFamily="Lucida Console" FontSize="16"
+                 Foreground="#FF000000" Background="#FFFFFFFF" />
+
+        <GridSplitter Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button x:Name="Run">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScriptablePhonebook;component/Resources/play.png" />
+                    <TextBlock Margin="5 0 0 0">Run</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="Clear">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScriptablePhonebook;component/Resources/empty.png" />
+                    <TextBlock Margin="5 0 0 0">Clear</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <TextBox Grid.Row="2" x:Name="Output" Padding="3" TextWrapping="Wrap"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                 FontFamily="Lucida Console" FontSize="16" IsReadOnly="True"
+                 Foreground="WhiteSmoke" Background="Navy" />
+    </Grid>
+</Window>

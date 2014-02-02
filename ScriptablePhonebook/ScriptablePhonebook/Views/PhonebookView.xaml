@@ -37,5 +37,13 @@
                 </StackPanel>
             </Button>
         </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="OpenConsole">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/ScriptablePhonebook;component/Resources/terminal.png" />
+                    <TextBlock Margin="5 0 0 0">Console</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

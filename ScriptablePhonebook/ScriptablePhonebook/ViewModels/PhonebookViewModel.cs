@@ -62,6 +62,20 @@ namespace ScriptablePhonebook.ViewModels
             contactRepository.RemoveContact(selectedContact.Model);
         }
 
+        public void OpenConsole()
+        {
+            var vm = IoC.Get<ConsoleViewModel>();
+            var consoleIsAlreadyOpen = vm.IsActive;
+            if(consoleIsAlreadyOpen)
+            {
+                BringToFront(vm);
+            }
+            else
+            {
+                windowManager.ShowWindow(vm);
+            }
+        }
+
         public void Handle(ContactRepositoryModifiedMessage message)
         {
             RefreshFromRepository();
@@ -70,6 +84,15 @@ namespace ScriptablePhonebook.ViewModels
         protected override void OnInitialize()
         {
             RefreshFromRepository();
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            if(close)
+            {
+                Application.Current.Shutdown();
+            }
+            base.OnDeactivate(close);
         }
 
         private void RefreshFromRepository()
@@ -82,6 +105,15 @@ namespace ScriptablePhonebook.ViewModels
         private ContactViewModel CreateContactViewModel(Contact contact)
         {
             return new ContactViewModel(contact);
+        }
+
+        private static void BringToFront(IViewAware vm)
+        {
+            var window = vm.GetView() as Window;
+            if(window != null)
+            {
+                window.Activate();
+            }
         }
     }
 }
